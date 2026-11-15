@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rohan Mayekar Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: one quiet column. Results hang in the left margin like a ledger; everything else is plain text. */
+:root{
+  --paper:#FAFAF7;
+  --ink:#16181D;
+  --muted:#686C75;
+  --line:#E3E3DE;
+  --mark:#FFE066;
+  --link:#2F3BC4;
+  --display:"Bricolage Grotesque", "Arial Narrow", system-ui, sans-serif;
+  --body:"IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){--paper:#121317;--ink:#EDEDE8;--muted:#9A9EA7;--line:#2A2C33;--mark:#8A6D00;--link:#A7ADFF;color-scheme:dark}
+}
+:root[data-theme="dark"]{--paper:#121317;--ink:#EDEDE8;--muted:#9A9EA7;--line:#2A2C33;--mark:#8A6D00;--link:#A7ADFF;color-scheme:dark}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.65}
+a{color:var(--link);text-underline-offset:3px}
+a:focus-visible{outline:2px solid var(--link);outline-offset:3px}
+main{max-width:880px;margin:0 auto;padding:64px 24px 48px}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+section{scroll-margin-top:56px}
+
+h1,h2{font-family:var(--display);margin:0;text-wrap:balance}
+h1{font-size:clamp(40px,7vw,64px);font-weight:800;line-height:1;letter-spacing:-.02em}
+h2{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 28px}
+section{padding:56px 0;border-top:1px solid var(--line)}
+p{margin:0}
+
+.role-line{margin-top:14px;font-size:19px}
+.intro{margin-top:20px;color:var(--muted);max-width:66ch}
+.links{margin-top:20px;display:flex;gap:20px;flex-wrap:wrap}
+
+/* the ledger: number in a fixed left column */
+.ledger{display:grid;gap:28px}
+.row{display:grid;grid-template-columns:150px 1fr;gap:24px;align-items:baseline}
+.n{font-family:var(--display);font-weight:800;font-size:34px;line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.n span{background:linear-gradient(transparent 55%,var(--mark) 55%);padding:0 2px}
+.row p.what{font-weight:600}
+.row p.how{color:var(--muted);margin-top:4px}
+.where{color:var(--muted);font-size:14px}
+
+.job{margin-bottom:44px}
+.job:last-child{margin-bottom:0}
+.job-head{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+.job-head b{font-size:18px;display:block}
+.plat{display:block;color:var(--muted);font-size:14px}
+.job .ledger{gap:16px}
+.job .n{font-size:24px}
+
+ul.plain{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+ul.plain b{font-weight:600}
+ul.plain span{color:var(--muted)}
+
+.skills{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.sk{border:2px solid #16181D;border-radius:14px;box-shadow:5px 5px 0 #16181D;margin:0 5px 5px 0;padding:18px 20px;display:grid;gap:12px;align-content:start}
+.sk h3{font-family:var(--display);font-size:18px;font-weight:800;margin:0}
+.sk ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.sk li{font-size:14px;padding:4px 12px;border-radius:999px;background:linear-gradient(120deg,#FFF1A8,#F6C9EC);color:#16181D;border:1px solid rgba(22,24,29,.25)}
+
+.quote{margin-top:24px;color:var(--muted);font-style:italic}
+footer{max-width:880px;margin:0 auto;padding:0 24px 40px;color:var(--muted);font-size:13px}
+
+@media (max-width:560px){
+  main{padding-top:48px}
+  .row{grid-template-columns:1fr;gap:6px}
+  .skills{grid-template-columns:1fr}
+}
+nav{border-bottom:1px solid var(--line);background:var(--paper);position:sticky;top:0;z-index:5}
+.navin{max-width:880px;margin:0 auto;padding:14px 24px;display:flex;justify-content:space-between;gap:16px;align-items:center}
+.navin div{display:flex;gap:18px;flex-wrap:wrap;justify-content:flex-end}
+.navin a{color:var(--muted);text-decoration:none;font-size:14px}
+.navin a:hover{color:var(--ink)}
+.navin .me{font-family:var(--display);font-weight:800;color:var(--ink);font-size:18px}
+.stats{margin-top:36px;display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.stats .n{font-size:30px}
+.stats p{font-size:14px;color:var(--muted);margin-top:8px;line-height:1.4}
+h3{font-size:16px;font-weight:600;margin:0 0 14px}
+h3 span{color:var(--muted);font-weight:400}
+ul.plain + h3{margin-top:36px}
+@media (max-width:560px){.stats{grid-template-columns:1fr 1fr}.navin .me{display:none}.navin div{justify-content:flex-start}}
+.certs{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.cert{display:grid;gap:4px;align-content:start}
+.cimg{display:flex;align-items:center;justify-content:center;height:230px;background:#EDEDE8;border:2px solid #16181D;border-radius:14px;box-shadow:5px 5px 0 #16181D;margin:0 6px 14px 0;padding:14px;overflow:hidden}
+.cimg img{max-width:100%;max-height:100%;display:block;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.cimg{cursor:zoom-in;width:calc(100% - 6px);font:inherit}
+.cimg:hover{transform:translate(-1px,-1px)}
+.cimg:focus-visible{outline:2px solid var(--link);outline-offset:3px}
+.lb{position:fixed;inset:0;z-index:50;background:rgba(10,11,14,.82);display:none;align-items:center;justify-content:center;padding:24px;cursor:zoom-out}
+.lb.open{display:flex}
+.lb img{max-width:min(1000px,100%);max-height:100%;border-radius:8px;box-shadow:0 10px 40px rgba(0,0,0,.5);background:#fff}
+.lb button{position:absolute;top:16px;right:16px;width:40px;height:40px;border-radius:50%;border:0;background:#fff;color:#16181D;font-size:22px;line-height:1;cursor:pointer}
+.cert b{font-family:var(--display);font-size:20px;font-weight:800;line-height:1.2}
+.cert .by{color:var(--muted);font-size:14px}
+.cl{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:10px;font-size:15px}
+@media (max-width:640px){.certs{grid-template-columns:1fr}}
+
+.cs-group{margin-top:44px}
+.cs-group:first-of-type{margin-top:0}
+.cs-ghead{display:grid;grid-template-columns:300px 1fr;gap:28px;align-items:center;margin-bottom:26px}
+.cs-ghead .cimg{height:200px;margin:0 6px 6px 0;width:auto}
+.cs-gtext{display:grid;gap:6px}
+.cs-gtext .tag{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.cs-gtext h3{font-family:var(--display);font-size:26px;font-weight:800;line-height:1.15;margin:0;text-wrap:balance}
+.cs-gtext p{color:var(--muted)}
+.cs-group + .cs-group{margin-top:64px;padding-top:48px;border-top:1px solid var(--line)}
+.cs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.cs{display:flex;flex-direction:column;background:var(--paper);border:2px solid #16181D;border-radius:14px;box-shadow:5px 5px 0 #16181D;overflow:hidden;margin:0 5px 5px 0}
+.cs-head{background:linear-gradient(120deg,#FFF1A8,#F6C9EC);color:#16181D;padding:14px 16px;border-bottom:2px solid #16181D;min-height:86px;display:grid;align-content:center;gap:4px}
+.cs-head .tag{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;opacity:.65}
+.cs-head h4{font-family:var(--display);font-size:17px;font-weight:800;line-height:1.25;margin:0;text-wrap:balance}
+.cs-line{padding:14px 16px 0;font-size:14px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.cs-line.muted{color:var(--muted)}
+.cs-foot{margin-top:auto;padding:14px 16px;display:flex;justify-content:space-between;gap:12px;font-size:14px;font-weight:600}
+.cs-foot a:only-child{margin-left:auto}
+.cs-foot a::after{content:" →"}
+.more{font:inherit;font-weight:600;color:var(--ink);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.more:focus-visible{outline:2px solid var(--link);outline-offset:3px}
+.csm{cursor:default}
+.csm-box{position:relative;background:var(--paper);color:var(--ink);border:2px solid #16181D;border-radius:16px;box-shadow:6px 6px 0 #16181D;max-width:620px;width:100%;max-height:100%;overflow:auto;padding:28px}
+.csm-box h3{font-family:var(--display);font-size:24px;font-weight:800;margin:0 40px 18px 0}
+.csm-box dl{margin:0 0 18px;display:grid;gap:4px}
+.csm-box dt{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:10px}
+.csm-box dd{margin:0;line-height:1.6}
+.csm-box .go{font-weight:600}
+.csm-box .go::after{content:" →"}
+.csm-box .x{position:absolute;top:14px;right:14px;width:36px;height:36px;border-radius:50%;border:2px solid #16181D;background:#fff;color:#16181D;font-size:20px;cursor:pointer}
+@media (max-width:820px){.cs-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:540px){.cs-grid{grid-template-columns:1fr}}
+@media (max-width:700px){.cs-ghead{grid-template-columns:1fr}.cs-ghead .cimg{height:180px}}
+
+.rlede{color:var(--muted);margin:-12px 0 28px}
+.rgrid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+.rc{margin:0 6px 6px 0;background:var(--paper);border:2px solid #16181D;border-radius:14px;box-shadow:5px 5px 0 #16181D;padding:22px 22px 18px;display:grid;gap:16px}
+.rc blockquote{margin:0;padding:0;border:0;font-family:var(--display);font-weight:700;font-size:19px;line-height:1.35;text-wrap:pretty}
+.rc figcaption{display:flex;gap:12px;align-items:center}
+.av{flex:none;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:14px;color:#16181D;background:linear-gradient(120deg,#FFF1A8,#F6C9EC);border:2px solid #16181D}
+.who{display:grid;font-size:14px;line-height:1.4}
+.who b{font-size:15px}
+.who span{color:var(--muted)}
+.who .rel{font-size:13px}
+.rmore{justify-self:start;font-size:14px}
+.rm-meta{color:var(--muted);font-size:14px;margin:-10px 0 16px}
+.rm-body{display:grid;gap:12px;line-height:1.65}
+@media (max-width:700px){.rgrid{grid-template-columns:1fr}}
+.aw-group{margin-bottom:40px}
+.aw-group:last-child{margin-bottom:0}
+.aw-group h3{font-family:var(--display);font-size:20px;font-weight:800;margin:0 0 18px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.aw-group .ledger{gap:22px}
+.aw-group .n{font-size:28px}
+.pill{display:inline-block;font-size:12px;font-weight:600;letter-spacing:.04em;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted);margin-bottom:6px}
+.pill.win{background:linear-gradient(120deg,#FFF1A8,#F6C9EC);color:#16181D;border-color:#16181D}
+.jh{display:flex;gap:14px;align-items:center}
+.co-badge{flex:none;width:46px;height:46px;border-radius:12px;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:18px;color:#111;border:2.5px solid #111;box-shadow:3px 3px 0 #111;letter-spacing:-.02em}
+.cb-k{background:#9DF2C4}.cb-a{background:#C9B8FF}.cb-u{background:#FFB4D9}
+.plat{display:flex !important;gap:6px;margin-top:6px;flex-wrap:wrap}
+.ptag{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;padding:2px 9px 2px 7px;border:1.5px solid #111;border-radius:999px;background:#fff;color:#111}
+.co-logo{flex:none;width:150px;height:48px;display:flex;align-items:center;justify-content:center;padding:0 12px;background:#fff;border:2.5px solid #111;border-radius:12px;box-shadow:3px 3px 0 #111;overflow:hidden}
+.co-logo img{max-width:100%;max-height:26px;width:auto;height:auto;display:block}
+.co-logo.full{padding:0;background:#DE4B4B}.co-logo.full img{max-height:none;max-width:none;width:100%;height:100%;object-fit:cover}
+@media (max-width:560px){.jh{flex-direction:column;align-items:flex-start;gap:10px}.co-logo{width:132px;height:42px}}
+
+/* V1 neo-brutalist: flat colour blocks, thick outlines, hard shadows, tilted stickers */
+:root,:root[data-theme="dark"]{--paper:#FFFDF4;--ink:#111;--muted:#3d3d3d;--line:#111;--mark:#FFE14D;color-scheme:light}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#FFFDF4;--ink:#111;--muted:#3d3d3d;--line:#111;color-scheme:light}}
+body{background:var(--paper)}
+nav{border-bottom:3px solid #111;background:#FFE14D}
+.navin a{color:#111;font-weight:600;padding:4px 10px;border:2px solid transparent;border-radius:999px}
+.navin a:hover{border-color:#111;background:#fff}
+.navin .me{background:#111;color:#FFE14D;border-radius:10px;padding:2px 10px}
+.nb-hero{position:relative;padding-bottom:36px;display:grid;grid-template-columns:3fr 2fr;gap:36px;align-items:center}
+.nb-photo{position:relative;margin:0 10px 10px 0;transform:rotate(2.5deg);transition:transform .2s}
+.nb-photo:hover{transform:rotate(0deg) scale(1.02)}
+.nb-photo img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;border:3px solid #111;border-radius:22px;box-shadow:10px 10px 0 #111;background:#9DF2C4}
+.st4{position:absolute;left:-18px;bottom:28px;background:#FFE14D;transform:rotate(-6deg)}
+@media (max-width:820px){
+  .nb-hero{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"st st" "name photo" "rest rest";column-gap:16px;row-gap:0;align-items:center}
+  .nb-text{display:contents}
+  .stickers{grid-area:st}
+  .nb-hero h1{grid-area:name;font-size:clamp(30px,10.6vw,80px) !important}
+  .nb-photo{grid-area:photo;width:clamp(96px,27vw,230px);margin:0 8px 8px 0;transform:rotate(4deg)}
+  .nb-photo img{border-radius:16px;box-shadow:6px 6px 0 #111}
+  .st4{font-size:12px;padding:4px 9px;left:auto;right:-6px;bottom:-14px;white-space:nowrap}
+  .nb-rest{grid-area:rest}
+}
+@media (max-width:480px){.st4{display:none}}
+@media (max-width:360px){.nb-hero h1{font-size:9.2vw !important}.nb-photo{width:84px !important}}
+@media (max-width:640px){.navin{padding:10px 16px}.navin div{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;gap:4px;scrollbar-width:none}.navin div::-webkit-scrollbar{display:none}.navin a{white-space:nowrap;font-size:13px}}
+.nb-hero h1{font-size:clamp(54px,8.2vw,100px);line-height:.86;letter-spacing:-.045em;text-transform:uppercase}
+.stickers{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+.st{font-weight:700;font-size:15px;padding:7px 14px;border:2.5px solid #111;border-radius:999px;box-shadow:3px 3px 0 #111;background:#fff}
+.st1{background:#C9B8FF;transform:rotate(-4deg)}.st2{background:#9DF2C4;transform:rotate(3deg)}.st3{background:#FFB4D9;transform:rotate(-2deg)}
+.now{display:inline-block;background:#111;color:#9DF2C4;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:6px;margin-right:8px;vertical-align:2px}
+.role-line{font-weight:600;font-size:21px;margin-top:22px}
+.intro{color:#111;font-size:18px}
+.nb-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
+.nb-btn{font-weight:700;text-decoration:none;color:#111;background:#fff;border:3px solid #111;border-radius:14px;padding:12px 20px;box-shadow:5px 5px 0 #111;transition:transform .12s,box-shadow .12s}
+.nb-btn.primary{background:#FF7AC6}
+.nb-btn:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 #111}
+.nb-btn:active{transform:translate(4px,4px);box-shadow:1px 1px 0 #111}
+.ticker{overflow:hidden;background:#111;color:#FFE14D;border-block:3px solid #111;margin:0 calc(50% - 50vw);white-space:nowrap}
+.ticker-track{display:inline-flex;gap:22px;padding:14px 0;animation:tick 28s linear infinite;font-weight:700;font-size:18px}
+.ticker i{font-style:normal;color:#FF7AC6}
+@keyframes tick{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.ticker-track{animation:none}}
+section{border-top:0;background:var(--sec);box-shadow:0 0 0 100vmax var(--sec);clip-path:inset(0 -100vmax);--sec:var(--paper)}
+#jobs{--sec:#FFF3A3}#case-studies{--sec:#E7DEFF}#recommendations{--sec:#D6F8E5}#awards{--sec:#FFE0EF}#skills{--sec:#FFFDF4}#contact{--sec:#111;color:#fff}
+h2{display:inline-block;background:#111;color:#fff;font-size:14px;padding:6px 14px;border-radius:999px;letter-spacing:.14em}
+#contact h2{background:#FFE14D;color:#111}
+#contact .quote{color:#bbb}#contact a{color:#FFE14D}
+.job-head b{font-size:22px;font-family:var(--display)}
+.ledger .row .n{background:#9DF2C4;color:#111;border:2.5px solid #111;border-radius:12px;box-shadow:4px 4px 0 #111;padding:10px 12px;font-size:22px;text-align:center;transition:transform .15s}
+.ledger .row:hover .n{transform:rotate(-3deg) scale(1.04)}
+.ledger .row .n span{background:none}
+.row{grid-template-columns:150px 1fr;align-items:center}
+.cs,.rc,.sk,.case-title,.cs-head{border-width:3px !important}
+.cs,.rc,.sk{box-shadow:6px 6px 0 #111 !important;background:#fff !important;transition:transform .15s}
+.cs:hover,.rc:hover,.sk:hover{transform:translate(-2px,-2px) rotate(-.6deg)}
+.cs-head{background:#FFE14D !important}
+.cs-group:nth-child(odd) .cs-head{background:#9DF2C4 !important}
+.cimg{background:#fff !important;border-width:3px !important}
+.rc blockquote{font-size:20px}
+.av{background:#FF7AC6 !important}
+.sk li{background:#fff !important;border:2px solid #111 !important;font-weight:600}
+.pill.win{background:#FFE14D;border:2px solid #111}
+.aw-group .n{background:#9DF2C4;color:#111;border:2.5px solid #111;border-radius:12px;box-shadow:4px 4px 0 #111;padding:8px 10px;text-align:center}
+footer{color:#111}
+.co-logo{box-shadow:none !important;border:1.5px solid rgba(17,17,17,.35) !important;border-radius:10px !important;height:44px !important}
+.co-logo.full{border-color:#111 !important}
+
+@media (max-width:560px){
+  .row{grid-template-columns:1fr !important;gap:10px !important;align-items:start}
+  .ledger .row .n,.aw-group .n{justify-self:start;font-size:20px !important;padding:6px 14px !important}
+  .ledger{gap:22px !important}
+  .job-head{flex-direction:column;gap:2px}
+  section{padding:44px 0}
+  .nb-btn{padding:10px 16px}
+}
+
+</style>
+</head>
+<body>
+<nav><div class="navin"><a href="#top" class="me">RM</a><div><a href="#jobs">Jobs</a><a href="#case-studies">Certifications &amp; case studies</a><a href="#recommendations">Recommendations</a><a href="#awards">Awards</a><a href="#skills">Skills</a><a href="#contact">Contact</a></div></div></nav>
+<main id="top">
+
+<header class="nb-hero">
+  <div class="nb-text">
+    <div class="stickers"><span class="st st1">AI-first ✦</span><span class="st st2">0 → 1 → N</span><span class="st st3">Growth PM</span></div>
+    <h1>Rohan<br>Mayekar</h1>
+    <div class="nb-rest">
+      <p class="role-line"><span class="now">Now</span> Product Manager at Kiddopia · Mumbai</p>
+      <p class="intro">Growth and AI focused Product Manager with 7+ years of experience, specializing in consumer lifecycle, product strategy, monetization, and funnel optimization. Proven track record of improving conversion, reducing revenue leakage, and driving measurable business outcomes through experimentation, data, and AI-led execution.</p>
+      <div class="nb-cta"><a class="nb-btn primary" href="#jobs">See the numbers</a><a class="nb-btn" href="https://www.linkedin.com/in/rohanmayekar/">LinkedIn</a></div>
+    </div>
+  </div>
+  <figure class="nb-photo"><img src="photo.jpg" alt="Rohan Mayekar sitting cross-legged on a beach towel, smiling"><span class="st st4">📍 Mumbai</span></figure>
+</header>
+<div class="ticker" aria-label="Highlights"><div class="ticker-track"><span>+50% install-to-trial</span><i>✦</i><span>₹7 Cr+ business owned</span><i>✦</i><span>−50% turnaround with AI</span><i>✦</i><span>2× hackathon winner</span><i>✦</i><span>12 recommendations</span><i>✦</i><span>4 certifications</span><i>✦</i><span>4+ experiments a month</span><i>✦</i><span>+50% install-to-trial</span><i>✦</i><span>₹7 Cr+ business owned</span><i>✦</i><span>−50% turnaround with AI</span><i>✦</i><span>2× hackathon winner</span><i>✦</i><span>12 recommendations</span><i>✦</i><span>4 certifications</span><i>✦</i><span>4+ experiments a month</span><i>✦</i></div></div>
+
+<section id="jobs">
+  <h2>Jobs</h2>
+
+  <div class="job">
+    <div class="job-head"><div class="jh"><span class="co-logo"><img src="logos/kiddopia.png" alt="Kiddopia logo"></span><div><b>Product Manager, Kiddopia</b><span class="plat"><span class="ptag"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><rect x="4" y="1.5" width="8" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="12" r=".9" fill="currentColor"/></svg>iOS</span><span class="ptag"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><rect x="4" y="1.5" width="8" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="12" r=".9" fill="currentColor"/></svg>Android</span></span></div></div><span class="where">Dec 2025 – Present</span></div>
+    <div class="ledger">
+      <div class="row"><div class="n">10→15%</div><p>Increased Install-to-Trial conversion from 10% to 15% (+50%) through 24-hour limited-time access and acquisition channel optimisation.</p></div>
+      <div class="row"><div class="n">~$100K</div><p>Projected annual incremental revenue from upgrade, retention and reactivation initiatives.</p></div>
+      <div class="row"><div class="n">1–2 hrs</div><p>Saved daily for Product, Business and QA teams with AI-powered dashboards and workflows.</p></div>
+      <div class="row"><div class="n">4+ / mo</div><p>Experiments shipped across subscription, monetisation and lifecycle journeys.</p></div>
+    </div>
+  </div>
+
+  <div class="job">
+    <div class="job-head"><div class="jh"><span class="co-logo"><img src="logos/azent.png" alt="Azent logo"></span><div><b>Product Manager, Azent Overseas Education</b><span class="plat"><span class="ptag"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><rect x="4" y="1.5" width="8" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="12" r=".9" fill="currentColor"/></svg>iOS</span><span class="ptag"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><rect x="4" y="1.5" width="8" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="12" r=".9" fill="currentColor"/></svg>Android</span></span></div></div><span class="where">Dec 2021 – Oct 2025</span></div>
+    <div class="ledger">
+      <div class="row"><div class="n">+30%</div><p>Conversion across the lead-to-student and shortlist-to-applicant funnels.</p></div>
+      <div class="row"><div class="n">−50%</div><p>Reduced application processing turnaround time by 50% through document extraction, profile-based SOP automation and follow-ups.</p></div>
+      <div class="row"><div class="n">₹7 Cr+</div><p>Annual B2B business owned end to end: strategy, roadmap, GTM and revenue.</p></div>
+    </div>
+  </div>
+
+  <div class="job">
+    <div class="job-head"><div class="jh"><span class="co-logo full"><img src="logos/upgrad.png" alt="upGrad logo"></span><div><b>Assistant Marketing Manager, upGrad</b></div></div><span class="where">May 2019 – Aug 2021</span></div>
+    <div class="ledger">
+      <div class="row"><div class="n">+30%</div><p>Revenue growth contributed through brand campaigns and agency and influencer partnerships.</p></div>
+      <div class="row"><div class="n">10M+</div><p>Campaign views and 1M+ engagements across TV, OTT, YouTube and Instagram.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="case-studies">
+  <h2>Certifications &amp; case studies</h2>
+  <div class="cs-group" id="cs-ai">
+    <div class="cs-ghead">
+      <button class="cimg" type="button" aria-label="View Professional Certificate Program in Advanced AI certificate larger"><img src="certs/ai-product-space.jpg" alt="Professional Certificate Program in Advanced AI certificate" loading="lazy"></button>
+      <div class="cs-gtext"><span class="tag">Certification</span><h3>Professional Certificate Program in Advanced AI</h3><p>Product Space · June 2025 · Top Performer</p></div>
+    </div>
+    <div class="cs-grid">
+      <article class="cs">
+        <div class="cs-head"><span class="tag">Built</span><h4>Interior Designing AI Assistant</h4></div>
+        <p class="cs-line">This solution provides homeowners, designers, and e-commerce platforms with an efficient way to visualise and shop for interior design, monetised through affiliate links, paid plans, and website plugins.</p>
+        <div class="cs-foot"><button type="button" class="more" data-cs="Interior Designing AI Assistant">Read case study</button><a href="https://drive.google.com/drive/folders/15d5PI_T4Zqh0rSxmRSdwLyqWeIVYrtRT?usp=sharing">Open files</a></div>
+      </article>
+      <article class="cs">
+        <div class="cs-head"><span class="tag">Assignment</span><h4>Hands On With AI</h4></div>
+        <p class="cs-line muted">Notion write-up</p>
+        <div class="cs-foot"><a href="https://www.notion.so/Assignment-01-Hands-On-with-AI-1c93764db02380a3938ae9307c69cce1?source=copy_link">Open files</a></div>
+      </article>
+      <article class="cs">
+        <div class="cs-head"><span class="tag">Assignment</span><h4>LLMs</h4></div>
+        <p class="cs-line muted">Notion write-up</p>
+        <div class="cs-foot"><a href="https://www.notion.so/Assignment-02-LLM-s-1d53764db0238054b313f77817950609?source=copy_link">Open files</a></div>
+      </article>
+      <article class="cs">
+        <div class="cs-head"><span class="tag">Assignment</span><h4>Prompt Engineering</h4></div>
+        <p class="cs-line muted">Notion write-up</p>
+        <div class="cs-foot"><a href="https://www.notion.so/Assignment-03-Prompt-Engineering-1dd3764db023807086b4c274beef8c5d?source=copy_link">Open files</a></div>
+      </article>
+      <article class="cs">
+        <div class="cs-head"><span class="tag">Assignment</span><h4>AI Product Life Cycle</h4></div>
+        <p class="cs-line muted">Notion write-up</p>
+        <div class="cs-foot"><a href="https://www.notion.so/Assignment-04-1f63764db02380b98c92ff94254a2239?source=copy_link">Open files</a></div>
+      </article>
+    </div>
+  </div>
+  <div class="cs-group" id="cs-mastering">
+    <div class="cs-ghead">
+      <button class="cimg" type="button" aria-label="View Mastering Product Management certificate larger"><img src="certs/mastering-pm.jpg" alt="Mastering Product Management certificate" loading="lazy"></button>
+      <div class="cs-gtext"><span class="tag">Certification</span><h3>Mastering Product Management</h3><p>Shravan Tickoo, Rethink Systems · August 2024</p></div>
+    </div>
+    <div class="cs-grid">
+      <article class="cs">
+        <div class="cs-head"><span class="tag">Concept</span><h4>Sukoon - Mental Health</h4></div>
+        <p class="cs-line">The app aims to alleviate anxiety and depression by providing calming exercises, positive affirmations, and anonymous community support. Success will be measured by app downloads, user engagement, revenue from consultations, and positive feedback.</p>
+        <div class="cs-foot"><button type="button" class="more" data-cs="Sukoon - Mental Health">Read case study</button><a href="https://drive.google.com/drive/folders/10KTYdpdpLAn1QZUpk-Wt4lZ9eu_N4qH6?usp=sharing">Open files</a></div>
+      </article>
+      <article class="cs">
+        <div class="cs-head"><span class="tag">Concept</span><h4>Trafix - Traffic Congestion</h4></div>
+        <p class="cs-line">Significantly improved traffic flow efficiency, measured by a lower &quot;Congestion Index,&quot; and better incident resolution and police attendance.</p>
+        <div class="cs-foot"><button type="button" class="more" data-cs="Trafix - Traffic Congestion">Read case study</button><a href="https://drive.google.com/drive/folders/1SgwvCNGSWBWiD_YPSv-OIwqYT6acwH9m?usp=sharing">Open files</a></div>
+      </article>
+      <article class="cs">
+        <div class="cs-head"><span class="tag">Concept</span><h4>Shopify - Merchant Platform &amp; Analytics</h4></div>
+        <p class="cs-line">Enhance merchant experience, drive business growth, improve satisfaction, and strengthen Shopify&#x27;s competitive position.</p>
+        <div class="cs-foot"><button type="button" class="more" data-cs="Shopify - Merchant Platform &amp; Analytics">Read case study</button><a href="https://drive.google.com/drive/folders/1Q40ASl16mP-mmQ_vKkHbFjF-8cckTO9Z?usp=sharing">Open files</a></div>
+      </article>
+      <article class="cs">
+        <div class="cs-head"><span class="tag">Concept</span><h4>Kenya - Fintech Solutions</h4></div>
+        <p class="cs-line">Credit-Pesa is designed to offer competitive fees, higher credit limits, and flexible repayment terms to attract users and foster financial inclusion, addressing the shortcomings of previous services.</p>
+        <div class="cs-foot"><button type="button" class="more" data-cs="Kenya - Fintech Solutions">Read case study</button><a href="https://drive.google.com/drive/folders/12urNn5S0cpR1GdxwU37AzSWc3JJ2Bt_Q?usp=sharing">Open files</a></div>
+      </article>
+      <article class="cs">
+        <div class="cs-head"><span class="tag">Concept</span><h4>Social Media Ad Verification</h4></div>
+        <p class="cs-line">99% scam detection accuracy, improve user satisfaction, and ultimately increase ad revenue by fostering a more trustworthy advertising ecosystem.</p>
+        <div class="cs-foot"><button type="button" class="more" data-cs="Social Media Ad Verification">Read case study</button><a href="https://drive.google.com/drive/folders/1lbTPs8KL3MAc6Nk76EUSg_yrH2bTfjn5?usp=sharing">Open files</a></div>
+      </article>
+      <article class="cs">
+        <div class="cs-head"><span class="tag">Concept</span><h4>AI - Aided ITR Filing</h4></div>
+        <p class="cs-line muted">Case study files on Drive</p>
+        <div class="cs-foot"><a href="https://drive.google.com/drive/folders/1GNg4MCZf6KVzayCyuGU4wqJvmEeovFem?usp=sharing">Open files</a></div>
+      </article>
+    </div>
+  </div>
+  <div class="cs-group" id="cs-folks">
+    <div class="cs-ghead">
+      <button class="cimg" type="button" aria-label="View Product Management Fundamentals certificate larger"><img src="certs/product-folks.jpg" alt="Product Management Fundamentals certificate" loading="lazy"></button>
+      <div class="cs-gtext"><span class="tag">Certification</span><h3>Product Management Fundamentals</h3><p>The Product Folks · November 2021 · 12 weeks</p></div>
+    </div>
+    <div class="cs-grid">
+      <article class="cs">
+        <div class="cs-head"><span class="tag">Case study</span><h4>FrontRow</h4></div>
+        <p class="cs-line muted">Slide deck</p>
+        <div class="cs-foot"><a href="https://docs.google.com/presentation/d/1uZz6o7tMB6gjdyvsaU923SjH3wJ_37SxshNiQANLlMY/edit?usp=sharing">Open files</a></div>
+      </article>
+      <article class="cs">
+        <div class="cs-head"><span class="tag">Case study</span><h4>Meesho</h4></div>
+        <p class="cs-line muted">Slide deck</p>
+        <div class="cs-foot"><a href="https://docs.google.com/presentation/d/18sDoS2nG11mj7b3leOf_YZmCJRvAX6ScBNGNdx4j1oY/edit?usp=sharing">Open files</a></div>
+      </article>
+      <article class="cs">
+        <div class="cs-head"><span class="tag">Case study</span><h4>YourStory</h4></div>
+        <p class="cs-line muted">Slide deck</p>
+        <div class="cs-foot"><a href="https://docs.google.com/presentation/d/1fG-sKoxSFjnKD2eCNhI8l022gfba3BAk8SKDApAYH5A/edit?usp=sharing">Open files</a></div>
+      </article>
+    </div>
+  </div>
+  <div class="cs-group" id="cs-duke">
+    <div class="cs-ghead">
+      <button class="cimg" type="button" aria-label="View Product Management Certification Program certificate larger"><img src="certs/duke-upgrad.jpg" alt="Product Management Certification Program certificate" loading="lazy"></button>
+      <div class="cs-gtext"><span class="tag">Certification</span><h3>Product Management Certification Program</h3><p>Duke Corporate Education × upGrad · Nov 2020 – May 2021</p></div>
+    </div>
+    <div class="cs-grid">
+      <article class="cs">
+        <div class="cs-head"><span class="tag">Coursework</span><h4>Assignments</h4></div>
+        <p class="cs-line muted">Drive folder</p>
+        <div class="cs-foot"><a href="https://drive.google.com/drive/folders/1X5fsISXxRADqLa3GGQXmSverIfxdZ1Pa?usp=sharing">Open files</a></div>
+      </article>
+      <article class="cs">
+        <div class="cs-head"><span class="tag">Coursework</span><h4>Case Studies</h4></div>
+        <p class="cs-line muted">Drive folder</p>
+        <div class="cs-foot"><a href="https://drive.google.com/drive/folders/1XmaUWRI8d3uEjWWkDVuvZDOUhHiN_cAA?usp=sharing">Open files</a></div>
+      </article>
+      <article class="cs">
+        <div class="cs-head"><span class="tag">Coursework</span><h4>Capstone Project</h4></div>
+        <p class="cs-line muted">Drive folder</p>
+        <div class="cs-foot"><a href="https://drive.google.com/drive/folders/142H8XoP1FlV6VJ82EvedtJnKAz_Y2Hu4?usp=sharing">Open files</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="recommendations">
+  <h2>Recommendations</h2>
+  <p class="rlede">12 recommendations on LinkedIn from managers, engineers, business and finance partners, and mentees.</p>
+  <div class="rgrid">
+    <figure class="rc">
+      <blockquote>“He operates with a clear outcomes-over-effort mindset to maximize user and business impact rather than optimize for features.”</blockquote>
+      <figcaption>
+        <span class="av" aria-hidden="true">KG</span>
+        <span class="who"><b>Kechit Goyal</b><span>Co-founder, ex-CTO at Azent</span><span class="rel">Managed Rohan directly · Oct 2025</span></span>
+      </figcaption>
+      <button type="button" class="more rmore" data-r="r0">Read full recommendation</button>
+    </figure>
+    <figure class="rc">
+      <blockquote>“Rohan is exceptional at creating human-centric AI tools that deliver measurable business results.”</blockquote>
+      <figcaption>
+        <span class="av" aria-hidden="true">AI</span>
+        <span class="who"><b>Ajay Imade</b><span>Engineering Manager · Azent</span><span class="rel">Senior to Rohan · Oct 2025</span></span>
+      </figcaption>
+      <button type="button" class="more rmore" data-r="r1">Read full recommendation</button>
+    </figure>
+    <figure class="rc">
+      <blockquote>“It’s rare to meet someone with such clarity of thought, impeccable communication, and an incredible product sense.”</blockquote>
+      <figcaption>
+        <span class="av" aria-hidden="true">RD</span>
+        <span class="who"><b>Rutvi Dresswala</b><span>Senior Product Manager · Azent</span><span class="rel">Senior to Rohan · Sep 2025</span></span>
+      </figcaption>
+      <button type="button" class="more rmore" data-r="r2">Read full recommendation</button>
+    </figure>
+    <figure class="rc">
+      <blockquote>“Rohan takes accountability and delivers results.”</blockquote>
+      <figcaption>
+        <span class="av" aria-hidden="true">AA</span>
+        <span class="who"><b>Anshuman Agrahari</b><span>Marketing Head · upGrad</span><span class="rel">Managed Rohan directly · Jun 2021</span></span>
+      </figcaption>
+      <button type="button" class="more rmore" data-r="r3">Read full recommendation</button>
+    </figure>
+    <figure class="rc">
+      <blockquote>“…someone you can rely on to push a project from idea to impact.”</blockquote>
+      <figcaption>
+        <span class="av" aria-hidden="true">AG</span>
+        <span class="who"><b>Arpit Gang</b><span>Senior Backend Engineer · Azent</span><span class="rel">Same team · Oct 2025</span></span>
+      </figcaption>
+      <button type="button" class="more rmore" data-r="r4">Read full recommendation</button>
+    </figure>
+    <figure class="rc">
+      <blockquote>“Under his mentorship, our group was able to stay focused, collaborate effectively, and ultimately achieved the Top Performer Award.”</blockquote>
+      <figcaption>
+        <span class="av" aria-hidden="true">JS</span>
+        <span class="who"><b>Jesal Shah</b><span>AI Product Manager · AI program</span><span class="rel">Mentee · Sep 2025</span></span>
+      </figcaption>
+      <button type="button" class="more rmore" data-r="r5">Read full recommendation</button>
+    </figure>
+    <figure class="rc">
+      <blockquote>“What sets Rohan apart is his ability to execute quickly from 0→1 while maintaining a human-first approach to AI product design.”</blockquote>
+      <figcaption>
+        <span class="av" aria-hidden="true">MC</span>
+        <span class="who"><b>Madhu Chakravarthy</b><span>AI Product Manager · Azent</span><span class="rel">Same team · Sep 2025</span></span>
+      </figcaption>
+      <button type="button" class="more rmore" data-r="r6">Read full recommendation</button>
+    </figure>
+    <figure class="rc">
+      <blockquote>“The result was a streamlined, error-reducing automation process that has saved our team significant time and effort.”</blockquote>
+      <figcaption>
+        <span class="av" aria-hidden="true">VK</span>
+        <span class="who"><b>Vaidik Khandelwal</b><span>CA, Finance · Azent</span><span class="rel">Different team · Sep 2025</span></span>
+      </figcaption>
+      <button type="button" class="more rmore" data-r="r7">Read full recommendation</button>
+    </figure>
+    <figure class="rc">
+      <blockquote>“Rohan is not just a manager but a leader who inspires both individual and team success.”</blockquote>
+      <figcaption>
+        <span class="av" aria-hidden="true">MM</span>
+        <span class="who"><b>Mohammad Javed Momin</b><span>Team Lead (Data) · Azent</span><span class="rel">Same team · Sep 2025</span></span>
+      </figcaption>
+      <button type="button" class="more rmore" data-r="r8">Read full recommendation</button>
+    </figure>
+    <figure class="rc">
+      <blockquote>“He consistently ensures that product goals align with user needs and business objectives.”</blockquote>
+      <figcaption>
+        <span class="av" aria-hidden="true">PS</span>
+        <span class="who"><b>Pritam Save</b><span>Business Head (B2B) · Azent</span><span class="rel">Same team · Sep 2025</span></span>
+      </figcaption>
+      <button type="button" class="more rmore" data-r="r9">Read full recommendation</button>
+    </figure>
+    <figure class="rc">
+      <blockquote>“His ability to generate prompts for AI is exceptional.”</blockquote>
+      <figcaption>
+        <span class="av" aria-hidden="true">JV</span>
+        <span class="who"><b>Jaya Durga Venkateswaran</b><span>Frontend Developer · Azent</span><span class="rel">Same team · Sep 2025</span></span>
+      </figcaption>
+      <button type="button" class="more rmore" data-r="r10">Read full recommendation</button>
+    </figure>
+    <figure class="rc">
+      <blockquote>“He has a real talent for turning complex ideas into simple, practical products.”</blockquote>
+      <figcaption>
+        <span class="av" aria-hidden="true">AM</span>
+        <span class="who"><b>Anshul Maher</b><span>Frontend Developer</span><span class="rel">Same team · Sep 2025</span></span>
+      </figcaption>
+      <button type="button" class="more rmore" data-r="r11">Read full recommendation</button>
+    </figure>
+  </div>
+  <div class="links"><a href="https://www.linkedin.com/in/rohanmayekar/details/recommendations/">See them on LinkedIn</a></div>
+</section>
+
+<section id="awards">
+  <h2>Awards</h2>
+  <div class="aw-group">
+    <h3>Azent Hackathon</h3>
+    <div class="ledger">
+      <div class="row"><div class="n">2025</div><div><span class="pill win">Winner</span><p class="what">Human-first AI Voice Classifier</p><p class="how">AI bot qualifies/disqualifies prospects via calls. Handles edge cases. Human-like decisions.</p></div></div>
+      <div class="row"><div class="n">2024</div><div><span class="pill">1st Runner-up</span><p class="what">SOP Builder</p><p class="how">Generates SOPs, verifies inputs, scores human-likeness (60%+), zero prompt needed.</p></div></div>
+      <div class="row"><div class="n">2023</div><div><span class="pill win">Winner</span><p class="what">University Commissions Calculator</p><p class="how">Auto-calculates per-student payouts from CRM triggers with contract-based logic.</p></div></div>
+    </div>
+  </div>
+  <div class="aw-group">
+    <h3>Demo Day &amp; Teardowns</h3>
+    <div class="ledger">
+      <div class="row"><div class="n">2025</div><div><span class="pill">1st Runner-up · The Product Space</span><p class="what">Room Interior AI Designer</p><p class="how">Add/remove/replace objects via text. 95% accuracy. Works across styles.</p></div></div>
+      <div class="row"><div class="n">2021</div><div><span class="pill">1st Runner-up · The Product Folks</span><p class="what">FrontRow Feature Teardown</p><p class="how">Concepted a new music community tool. Ranked Top 3.</p></div></div>
+    </div>
+  </div>
+  <div class="aw-group">
+    <h3>Platform Recognition</h3>
+    <div class="ledger">
+      <div class="row"><div class="n">2024</div><div><span class="pill">LinkedIn</span><p class="what">Top Product Management Voice</p><p class="how">Recognised for insights, product storytelling, and community impact.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <h2>Skills</h2>
+  <div class="skills">
+    <div class="sk"><h3>AI and automation</h3><ul><li>Prompt engineering</li><li>AI prototyping</li><li>Voice AI</li><li>Image AI</li><li>Vercel</li></ul></div>
+    <div class="sk"><h3>Product and research</h3><ul><li>User research</li><li>Strategy</li><li>Stakeholder management</li><li>MVPs</li><li>Analytics</li><li>Product lifecycle</li></ul></div>
+    <div class="sk"><h3>Tools and analytics</h3><ul><li>Amplitude</li><li>SQL</li><li>Google Cloud</li><li>MongoDB</li><li>Postman</li><li>Strapi</li><li>Zoho</li><li>Notion</li><li>Confluence</li><li>Slack</li></ul></div>
+    <div class="sk"><h3>Marketing and outreach</h3><ul><li>GTM</li><li>Email and SMS marketing</li><li>IVR</li><li>ORM</li></ul></div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Contact</h2>
+  <p style="font-size:22px;font-weight:600">Let's build something bold together.</p>
+  <div class="links"><a href="https://www.linkedin.com/in/rohanmayekar/">Message me on LinkedIn</a></div>
+  <p class="quote">“The only way to beat AI is to be more human.”</p>
+</section>
+
+</main>
+<footer>Rohan Mayekar · Product Manager · Mumbai</footer>
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Certificate"><button type="button" aria-label="Close">×</button><img alt=""></div>
+<script>
+(function(){
+  var lb=document.getElementById('lb'), im=lb.querySelector('img'), last=null;
+  function close(){lb.classList.remove('open'); if(last) last.focus();}
+  document.querySelectorAll('.cimg').forEach(function(b){
+    b.addEventListener('click',function(){var src=b.querySelector('img'); im.src=src.src; im.alt=src.alt; last=b; lb.classList.add('open'); lb.querySelector('button').focus();});
+  });
+  lb.addEventListener('click',close);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&lb.classList.contains('open'))close();});
+})();
+</script>
+<div class="lb csm" id="csm" role="dialog" aria-modal="true" aria-labelledby="csm-t"><div class="csm-box"><button type="button" class="x" aria-label="Close">×</button><h3 id="csm-t"></h3><dl></dl><a class="go" target="_blank" rel="noopener">Open files</a></div></div>
+<script>
+(function(){
+  var D={"Interior Designing AI Assistant": {"r": "This solution provides homeowners, designers, and e-commerce platforms with an efficient way to visualise and shop for interior design, monetised through affiliate links, paid plans, and website plugins.", "s": "Many people struggle to visualise how new furniture or decor will look in their rooms, leading to costly and time-consuming trial-and-error.", "t": "The goal was to create a personalised AI interior designer that allows users to redesign their actual rooms and receive a shopping list easily.", "a": "An AI tool was developed where users upload a room image, prompt for changes, choose a style, and get a transformed room image with clickable product links.", "u": "https://drive.google.com/drive/folders/15d5PI_T4Zqh0rSxmRSdwLyqWeIVYrtRT?usp=sharing"}, "Sukoon - Mental Health": {"r": "The app aims to alleviate anxiety and depression by providing calming exercises, positive affirmations, and anonymous community support. Success will be measured by app downloads, user engagement, revenue from consultations, and positive feedback.", "s": "Mental health patients struggle with emotional distress and social isolation. The Indian mental health market is growing, but lacks professional support and adequate funding.", "t": "Develop \"Mindful Quest,\" a mobile game to engage individuals with mental health challenges through gamified meditation, storytelling, and community features.", "a": "The \"Mindful Quest\" case study will guide users through six levels, from onboarding to community interaction, offering therapist consultations and progress tracking.", "u": "https://drive.google.com/drive/folders/10KTYdpdpLAn1QZUpk-Wt4lZ9eu_N4qH6?usp=sharing"}, "Trafix - Traffic Congestion": {"r": "Significantly improved traffic flow efficiency, measured by a lower \"Congestion Index,\" and better incident resolution and police attendance.", "s": "Cities like Bangalore face severe traffic congestion, costing the Indian economy billions and commuters significant time due to inefficient management and poor city planning.", "t": "Develop \"Trafix,\" a B2B application to reduce traffic congestion through smart solutions, real-time data, and coordinated efforts among traffic police, command centres, and government bodies.", "a": "Trafix will improve traffic management, provide instant insights, enhance communication, and streamline incident management by integrating with existing systems and personnel.", "u": "https://drive.google.com/drive/folders/1SgwvCNGSWBWiD_YPSv-OIwqYT6acwH9m?usp=sharing"}, "Shopify - Merchant Platform & Analytics": {"r": "Enhance merchant experience, drive business growth, improve satisfaction, and strengthen Shopify's competitive position.", "s": "Shopify merchants face a competitive e-commerce landscape and struggle with complex dashboards; employees lack adequate tools for support.", "t": "Develop a Merchant Dashboard for actionable insights and a Platform Analytics Dashboard for employee monitoring and proactive issue resolution.", "a": "A Merchant App with a user-friendly dashboard, product/order/customer management, and advanced analytics, plus an Account Manager App for merchant health monitoring and collaboration. Onboard merchants through the Awareness, Acquisition, and Activation stages.", "u": "https://drive.google.com/drive/folders/1Q40ASl16mP-mmQ_vKkHbFjF-8cckTO9Z?usp=sharing"}, "Kenya - Fintech Solutions": {"r": "Credit-Pesa is designed to offer competitive fees, higher credit limits, and flexible repayment terms to attract users and foster financial inclusion, addressing the shortcomings of previous services.", "s": "M-Pesa aims to provide micro-financing in Kenya, where many lack access to formal credit. Existing solutions like Fuliza M-Pesa faced user dissatisfaction and competition.", "t": "Launch Credit-Pesa, a P2P lending platform within M-Pesa, to offer accessible and affordable micro-financing to small businesses and low-income individuals.", "a": "A platform connecting investors and borrowers, leveraging M-Pesa's infrastructure for credit scoring and risk assessment, with diverse lending schemes, clear risk profiles and interest rates.", "u": "https://drive.google.com/drive/folders/12urNn5S0cpR1GdxwU37AzSWc3JJ2Bt_Q?usp=sharing"}, "Social Media Ad Verification": {"r": "99% scam detection accuracy, improve user satisfaction, and ultimately increase ad revenue by fostering a more trustworthy advertising ecosystem.", "s": "Social media platforms are facing significant issues with fraudulent ads, causing financial losses and eroding user trust due to inadequate verification processes.", "t": "Develop an AI-driven system to identify and flag suspicious ads in real-time, creating a safer advertising environment while maintaining user experience.", "a": "An AI-driven system that conducts comprehensive checks on ad images, pricing, and text. Ads are scored for suspiciousness, with highly suspicious ones getting limited visibility, blurred photos, and a user reporting option.", "u": "https://drive.google.com/drive/folders/1lbTPs8KL3MAc6Nk76EUSg_yrH2bTfjn5?usp=sharing"}};
+  var m=document.getElementById('csm'), box=m.querySelector('.csm-box'), last=null;
+  function esc(t){var d=document.createElement('div');d.textContent=t;return d.innerHTML;}
+  function close(){m.classList.remove('open'); if(last) last.focus();}
+  document.querySelectorAll('.more').forEach(function(b){b.addEventListener('click',function(){
+    var k=b.getAttribute('data-cs'), c=D[k]; last=b;
+    m.querySelector('h3').textContent=k;
+    m.querySelector('dl').innerHTML='<dt>Result</dt><dd>'+esc(c.r)+'</dd><dt>Situation</dt><dd>'+esc(c.s)+'</dd><dt>Task</dt><dd>'+esc(c.t)+'</dd><dt>Action</dt><dd>'+esc(c.a)+'</dd>';
+    m.querySelector('a.go').href=c.u; m.classList.add('open'); m.querySelector('.x').focus();
+  });});
+  m.addEventListener('click',function(e){if(e.target===m||e.target.classList.contains('x'))close();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&m.classList.contains('open'))close();});
+})();
+</script>
+<div class="lb csm" id="rm" role="dialog" aria-modal="true" aria-labelledby="rm-t"><div class="csm-box"><button type="button" class="x" aria-label="Close">×</button><h3 id="rm-t"></h3><p class="rm-meta"></p><div class="rm-body"></div></div></div>
+<script>
+(function(){
+  var D={"r0": {"n": "Kechit Goyal", "m": "Co-founder, ex-CTO at Azent · Managed Rohan directly · Oct 2025", "t": "I worked closely with Rohan during his transition into product management, where he quickly became one of our most reliable PMs. His rigor in requirements and testing translated into near-zero production issues on the initiatives he led. Rohan invested significant effort in self-learning backend, frontend, and AI/LLM fundamentals, and he consistently brought that technical depth into product discussions, and prioritization. He operates with a clear outcomes-over-effort mindset to maximize user and business impact rather than optimize for features."}, "r1": {"n": "Ajay Imade", "m": "Engineering Manager · Azent · Senior to Rohan · Oct 2025", "t": "I had the pleasure of working closely with Rohan Mayekar, who stands out as an accomplished AI Product Manager with deep expertise in building both B2B and B2C solutions. Rohan is exceptional at creating human-centric AI tools that deliver measurable business results. Throughout his career, he has consistently demonstrated strong product vision, from shipping 5+ innovative AI features to leading high-impact product initiatives at Azent. He actively mentors aspiring product managers and shares actionable advice with the community. I highly recommend Rohan for any organization seeking a forward-thinking and dependable product leader."}, "r2": {"n": "Rutvi Dresswala", "m": "Senior Product Manager · Azent · Senior to Rohan · Sep 2025", "t": "Rohan and I built products together at Azent, and I can truly say there isn’t a better partner-in-crime than Rohan Mayekar when you’re building complicated, tough products. It’s rare to meet someone with such clarity of thought, impeccable communication, and an incredible product sense. I’ve seen Rohan thrown into the toughest situations; he tackles them with grit, out-of-the-box thinking, and a very funny sense of humor. He keeps his team culture light yet disciplined—don’t ask me how—but I’ve seen his team love and respect him even on days when he’s tackling something new and figuring it out from scratch.\n\nAny team—truly any team, in any function or industry—would be lucky to have Rohan. He’s hardworking, thrives in ambiguity, and never backs away from a challenge. I consider it a privilege to have worked alongside him, and to call him a friend :)"}, "r3": {"n": "Anshuman Agrahari", "m": "Marketing Head · upGrad · Managed Rohan directly · Jun 2021", "t": "Rohan takes accountability and delivers results. He has been pivotal in changing upGrad's presence on social media channels by owning the execution and leading the team from front to come up with new ideas almost every week and making sure it converts. He's someone who keeps on learning new things, has a 360 degree understanding of business - contributing to the overall growth. Great job!"}, "r4": {"n": "Arpit Gang", "m": "Senior Backend Engineer · Azent · Same team · Oct 2025", "t": "It’s been an absolute pleasure working closely with Rohan during our time together at Azent Overseas. As a Product Manager in the tech team, he consistently demonstrated a strong mix of strategic thinking, user-first mindset, and deep product ownership.\n\nWe’ve collaborated on multiple projects, and what stood out every single time was his ability to translate complex business needs into clear, actionable product goals. He’s not just great at defining roadmaps and managing stakeholders — he’s also hands-on when it comes to understanding technical challenges and ensuring smooth collaboration between product and engineering teams.\n\nRohan has always given clarity in ambiguity, drives initiatives with conviction, and is someone you can rely on to push a project from idea to impact. Any team would be lucky to have him."}, "r5": {"n": "Jesal Shah", "m": "AI Product Manager · AI program · Mentee · Sep 2025", "t": "I had the privilege of being mentored by Rohan during our AI program. His guidance, encouragement, and structured approach to teamwork were invaluable. Under his mentorship, our group was able to stay focused, collaborate effectively, and ultimately achieved the Top Performer Award. I am truly grateful for his support, and I would highly recommend him as a mentor who brings out the best in his learners."}, "r6": {"n": "Madhu Chakravarthy", "m": "AI Product Manager · Azent · Same team · Sep 2025", "t": "I highly recommend Rohan Mayekar as an exceptional AI Product Manager who consistently delivers impactful results. During his tenure at Azent, Rohan has demonstrated remarkable expertise in building AI-powered products that solve real business problems; from launching a Loan Eligibility GPT that serves thousands of users to developing sophisticated tools like the SOP Builder and Counseling Call Analyzer that have significantly improved operational efficiency. What sets Rohan apart is his ability to execute quickly from 0→1 while maintaining a human-first approach to AI product design. His track record speaks for itself: he's shipped 5+ AI features, achieved conversion rates of 15-25% on his recommendation engines, reduced turnaround times by 50-80%, and consistently won hackathons (2023, 2025) while being a runner-up in 2024. Beyond his technical skills in prompt engineering, LLMs, and GenAI, Rohan brings strong analytical thinking, data-driven decision making, and the rare ability to scale products across B2B and B2C environments. His experience spans the entire product lifecycle, from ideation to production deployment, making him a valuable asset to any team looking to build meaningful AI products that create genuine value for users."}, "r7": {"n": "Vaidik Khandelwal", "m": "CA, Finance · Azent · Different team · Sep 2025", "t": "I had the pleasure of collaborating with Rohan on a complex project aimed at automating the calculation of revenue, which involved navigating various agreements with intricate structures. As a finance professional, I was especially impressed with his ability to understand and translate complex financial requirements into clear, actionable solutions. He successfully bridged the gap between finance and development teams, ensuring that the final automation system met all our needs while remaining efficient and scalable.\n\nWhat sets Rohan apart is his strategic mindset and resourcefulness in tackling ambiguity. He expertly managed stakeholder expectations, prioritized key features, and ensured that any challenges were swiftly addressed. The result was a streamlined, error-reducing automation process that has saved our team significant time and effort. I highly recommend Rohan for his exceptional product management skills, combining both technical expertise and a deep understanding of business needs."}, "r8": {"n": "Mohammad Javed Momin", "m": "Team Lead (Data) · Azent · Same team · Sep 2025", "t": "I highly recommend Rohan for his exceptional leadership as my Product Manager. Here are the five key reasons:\n\n1. Clarity in Leadership – He always set clear priorities and guided the team with vision, ensuring we stayed focused and confident.\n\n2. Cross-Team Collaboration – Rohan seamlessly coordinated with multiple teams, breaking silos and driving smooth collaboration.\n\n3. Problem-Solving Approach – He handled challenges calmly, quickly resolving blockers and keeping projects on track.\n\n4. Empowering & Mentoring – Rohan trusted team members with ownership, gave constructive feedback, and encouraged personal growth — something I benefitted from directly.\n\n5. People-First Mindset – He built an environment of trust, accountability, and motivation, where every team member felt valued.\n\nIn short, Rohan is not just a manager but a leader who inspires both individual and team success."}, "r9": {"n": "Pritam Save", "m": "Business Head (B2B) · Azent · Same team · Sep 2025", "t": "Working with Rohan has been a great experience.\nRohan is a highly skilled Product Manager with a sharp eye for detail and a strong focus on delivering effective solutions. He consistently ensures that product goals align with user needs and business objectives, all while keeping projects on track and meeting deadlines without compromising quality. Beyond the technical side, Rohan brings a positive, friendly attitude that makes collaboration smooth and enjoyable. A true team player and a valuable asset to any team."}, "r10": {"n": "Jaya Durga Venkateswaran", "m": "Frontend Developer · Azent · Same team · Sep 2025", "t": "I have worked alongside Rohan at many projects, and was always impressed with his clean direction, and efficient communication. His ability to generate prompts for AI is exceptional. He has a very solid grasp of project requirements, and his time management is absolutely top tier. Rohan is a very strong project manager, who easily goals between technical and business requirements, and it is always pleasure to work with him."}, "r11": {"n": "Anshul Maher", "m": "Frontend Developer · Same team · Sep 2025", "t": "It’s been fantastic working alongside Rohan. He has a real talent for turning complex ideas into simple, practical products. Always approachable and solution-oriented, he strikes a great balance between digging into the details and keeping things clear and straightforward."}};
+  var m=document.getElementById('rm'), last=null;
+  function close(){m.classList.remove('open'); if(last) last.focus();}
+  document.querySelectorAll('.rmore').forEach(function(b){b.addEventListener('click',function(){
+    var c=D[b.getAttribute('data-r')]; last=b;
+    m.querySelector('h3').textContent=c.n; m.querySelector('.rm-meta').textContent=c.m;
+    var body=m.querySelector('.rm-body'); body.innerHTML='';
+    c.t.split(/\n+/).forEach(function(p){var e=document.createElement('p');e.textContent=p;body.appendChild(e);});
+    m.classList.add('open'); m.querySelector('.x').focus();
+  });});
+  m.addEventListener('click',function(e){if(e.target===m||e.target.classList.contains('x'))close();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&m.classList.contains('open'))close();});
+})();
+</script>
+</body>
+</html>
